@@ -1,0 +1,24 @@
+{
+  "name": "jef_perfumaria_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acidbutter96/jef_perfumaria_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acidbutter96/jef_perfumaria_api/issues"
+  },
+  "homepage": "https://github.com/acidbutter96/jef_perfumaria_api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "sucrase": "^3.17.1"
+  }
+}
