@@ -23,6 +23,10 @@ const Employee = new mongoose.Schema({
         type: Date,
         required: false
     },
+    status: {
+        type: Boolean,
+        required: false
+    },
     totalmonthsale:{
         type: Number,
         required: true

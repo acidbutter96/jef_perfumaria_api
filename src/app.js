@@ -1,22 +1,30 @@
 import express from 'express'
 import routes from './routes'
+import cors from 'cors'
 
 import './config/connect'
 
 class App {
   constructor() {
-    this.server = express()
+    this.app = express()
     this.middlewares()
     this.routes()
   }
 
   middlewares() {
-    this.server.use(express.json())
+    this.app.use(express.json())
+
+    this.app.use((req,res,next)=>{
+      res.header('Access-Control-Allow-Origin','*')
+      res.header('Access-Controll-Allow-Methods','GET, PUT, POST, DELETE')
+      res.header('Access-Controll-Allow-Headers','X-PINGOTHER, Content-Type')
+      next()
+    })
   }
 
   routes() {
-    this.server.use(routes)
+    this.app.use(routes)
   }
 }
 
-export default new App().server
+export default new App().app

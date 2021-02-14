@@ -6,7 +6,7 @@ class DataBase{
     }
 
     mongoDataBase(){
-        this.mongoDBConnection = mongoose.connect('mongodb+srv://admin:Popo.3039110@cluster0.dw7bq.mongodb.net/jef_perfumaria?retryWrites=true&w=majority',{
+        this.mongoDBConnection = mongoose.connect('mongodb+srv://admin:123@cluster0.dw7bq.mongodb.net/jef-perfumaria?retryWrites=true&w=majority',{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,

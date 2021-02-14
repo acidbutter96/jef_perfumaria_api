@@ -14,6 +14,10 @@ const Owner = new mongoose.Schema({
         type: String,
         required: true
     },
+    ownergrade: {
+        type: Number,
+        required: true
+    }
 
 },{
     timestamps: true
