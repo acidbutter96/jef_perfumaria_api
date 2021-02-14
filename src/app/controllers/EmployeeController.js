@@ -64,7 +64,7 @@ class EmployeeController {
     data.type = 10
     data.password = await bcrypt.hash(data.password, 8)
 
-    const employee = await Employee.create(req.body)
+    const employee = await Employee.create(data)
 
     return res.status(200).json({
       error: false,

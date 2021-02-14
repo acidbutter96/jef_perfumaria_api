@@ -10,14 +10,10 @@ const Sale = new mongoose.Schema({
         type: Number,
         required: true
     },
-    dateof: {
-        type:Date,
-        required: true
-    },
-    saleid:{
+    salejson: {
         type:String,
         required: true
-    },
+    }
 },{
     timestamps:true
 })
