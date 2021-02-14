@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
 import Sale from '../models/Sale'
 import Employee from '../models/Employee'
+import { response } from 'express'
 
 class SaleController {
     async create(req, res) {
@@ -24,34 +25,61 @@ class SaleController {
             })
         }
 
-        const vendorExists = await Employee.findById(data.vendorid)
+        const vendorExists = await Employee.findOne({ _id: data.vendorid }).catch((err) => {
+            return res.status(400).json({
+                finished: false,
+                error: true,
+                code: 301,
+                message: 'Vendedor não encontrado'
+            })
+            console.log(err)
+        })
 
-        if (vendorExists) {
+        if (vendorExists.status) {
             const total = vendorExists.completedsales + data.value
             const month = vendorExists.totalmonthsale + data.value
+            /* const ctotal = vendorExists.completedsales - data.value
+            const cmonth = vendorExists.totalmonthsale - data.value */
 
-            await Employee.updateOne({ _id: vendorExists._id }, {
-                completedsales: total,
-                totalmonthsale: month
-            }, (err) => {
-                if (err) {
-                    return res.status(400).json({
-                        error: true,
-                        code: 117,
-                        message: err
-                    })
-                }
+            const sale = await Sale.create(data).then((sale) => {
+                return res.json({
+                    finished: true,
+                    sale
+                })
+            }).catch((err) => {
+                return res.status(400).json({
+                    error: true,
+                    code: 117,
+                    message: err
+                })
             })
+            if (sale) {
+                await Employee.updateOne({ _id: vendorExists._id }, {
+                    completedsales: total,
+                    totalmonthsale: month
+                }, async (err) => {
 
-            return res.json({ finished: true })
+                    if (err) {
+                        return res.status(400).json({
+                            error: true,
+                            code: 117,
+                            message: err
+                        })
+                    }
+                })
+            }
+
+
             //return res.json(vendorExists.totalmonthsale+data.value)
         }
 
-        return res.json(vendorExists)
+        return res.status(400).json({
+            error: true,
+            code: 302,
+            message: 'Vendedor desativado, consulte administrador do sistema.'
+        })
 
-
-
-
+        //return res.json(vendorExists)
     }
 }
 
