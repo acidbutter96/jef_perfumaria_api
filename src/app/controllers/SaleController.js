@@ -81,6 +81,26 @@ class SaleController {
 
         //return res.json(vendorExists)
     }
+
+    async show(req,res){
+        const _id = req.params.id
+        const sale = Sale.findOne({_id})
+        return res.json(sale)
+    }
+
+    async index(req,res){
+        const {page =1 } = req.query
+        const {limit =20 } = req.query
+
+        //const sale = await Sale.
+        return res.json(req.body)
+    }
+
+    async indexof(req,res){
+        return res.json(req.params.id)
+    }
+
+    
 }
 
 export default new SaleController()

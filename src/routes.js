@@ -7,6 +7,7 @@ import OwnerController from './app/controllers/OwnerController'
 
 import authMiddleware from './app/middlewares/auth'
 import authMiddlewareOwner from './app/middlewares/authowner'
+import authMiddlewareBoth from './app/middlewares/authboth'
 
 // import all controllers
 // import SessionController from './app/controllers/SessionController'
@@ -18,6 +19,8 @@ routes.post('/v1/employee', EmployeeController.create)
 routes.get('/v1/employee/:id', authMiddleware,EmployeeController.show)
 
 routes.post('/v1/sale',authMiddleware,SaleController.create)
+routes.get('/v1/sale/:id',authMiddlewareBoth,SaleController.show)
+routes.get('/v1/sales/:id',authMiddlewareBoth,SaleController.index)
 
 routes.get('/v1/products',ProductController.index)
 
