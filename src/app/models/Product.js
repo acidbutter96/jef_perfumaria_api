@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-const Product = new mongoose.Product({
+const Product = new mongoose.Schema({
     name:{
         type: String,
         required: true

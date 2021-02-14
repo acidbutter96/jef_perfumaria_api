@@ -19,6 +19,10 @@ const Employee = new mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: Number,
+        required: true
+    },
     lastlogin:{
         type: Date,
         required: false

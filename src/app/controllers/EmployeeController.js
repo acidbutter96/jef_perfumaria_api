@@ -61,6 +61,7 @@ class EmployeeController {
     data.totalmonthsale = 0
     data.completedsales = 0
     data.status = true
+    data.type = 10
     data.password = await bcrypt.hash(data.password, 8)
 
     const employee = await Employee.create(req.body)
@@ -93,7 +94,7 @@ class EmployeeController {
 
     await Employee.paginate({},
       {
-        select: '_id name username cpf totalmonthsale completedsales status createdAt updatedAt',
+        select: '_id name username cpf totalmonthsale completedsales status type createdAt updatedAt',
         page,
         limit
       }).then((employees) => {
@@ -117,6 +118,7 @@ class EmployeeController {
       username: Yup.string(),
       password: Yup.string()
         .min(6),
+      type: Yup.number(),
       oldpassword: Yup.string()
         .min(6)
     })
@@ -129,7 +131,7 @@ class EmployeeController {
       })
     }
 
-    const { _id, username, password, oldpassword } = req.body
+    const { _id, username, password, type, oldpassword } = req.body
 
     const employeeExists = await Employee.findOne({
       _id: _id
@@ -144,6 +146,10 @@ class EmployeeController {
     }
 
     var data = {}
+
+    if(type){
+      data.type = type
+    }
 
     if (username) {
       if ((await Employee.findOne({ username: username }))) {
