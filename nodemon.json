@@ -2,7 +2,7 @@
     "watch":["src"],
     "ext":"js",
     "execMap": {
-        "js":"sucrase-nnode src/server.js"
+        "js":"sucrase-node src/server.js"
     }
     
 }
