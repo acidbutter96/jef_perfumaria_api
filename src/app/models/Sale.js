@@ -11,7 +11,7 @@ const Sale = new mongoose.Schema({
         required: true
     },
     salejson: {
-        type:String,
+        type:Object,
         required: true
     }
 },{
